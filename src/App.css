@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap");
+
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image:
+    radial-gradient(ellipse at top, rgba(255, 79, 163, 0.2), transparent 50%),
+    radial-gradient(circle at bottom left, rgba(70, 174, 238, 0.2), transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size:
+    cover,
+    cover,
+    40px 40px,
+    40px 40px;
+}
+
+.top-text {
+  font-family: "Jetbrains Mono", monospace;
+  color: #f7f1f6;
+  font-size: 1.05rem;
+  text-align: center;
+  line-height: 1.5;
+  text-shadow: 0 0 20px #ff4fa3;
+}
+
+.locker {
+  width: 100%;
+  height: 70%;
+}
+
+.open {
+  background: transparent;
+  color: #f7f1f6;
+  font-family: "Jetbrains Mono", monospace;
+  font-size: 1rem;
+  text-shadow: 0 0 20px #ff4fa3;
+  border: none;
+  padding: 8px 16px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.open:hover {
+  color: #ff4fa3;
+  text-shadow:
+    0 0 30px #ff4fa3,
+    0 0 10px #ff4fa3;
+  border-color: #ff4fa3;
+  background: rgba(255, 79, 163, 0.05);
+}
+button {
+  cursor: pointer;
+}
