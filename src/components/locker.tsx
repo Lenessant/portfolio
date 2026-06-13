@@ -1,11 +1,24 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
+function CameraZoom ({zooming}: {zooming:boolean}) {
+  const { camera } = useThree()
+  useFrame(() => {
+    if (zooming) {
+      camera.position.lerp (new THREE.Vector3(0,1,5), 0.5)
+      camera.updateProjectionMatrix
+    }
+  })
+  return null
+}
+
 function LockerModel() {
   const { scene } = useGLTF("/models/lockers.glb");
   const groupRef = useRef<THREE.Group>(null);
+
+  const startTime = useRef(performance.now())
 
   useEffect(() => {
     scene.traverse((child) => {
@@ -22,12 +35,17 @@ function LockerModel() {
       const t = clock.getElapsedTime();
       groupRef.current.rotation.y = -0.3 + Math.sin(t * 0.5) * 0.03;
       groupRef.current.rotation.x = Math.sin(t * 1) * 0.04;
+
+      const elapsed = (performance.now() - startTime.current) / 1000
+      const introProgress = Math.min (elapsed / 0.8, 1)
+      const eased = 1 - Math.pow (1 - introProgress, 3)
+      groupRef.current.scale.setScalar(0.5*eased)
     }
   });
 
   return (
     <group ref={groupRef} position={[9, 9, 2]}>
-      <primitive object={scene} scale={0.5} />
+      <primitive object={scene} />
     </group>
   );
 }
