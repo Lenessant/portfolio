@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-function TypingText({ text, speed = 50 }: { text: string; speed?: number }) {
-  const [displayed, setDisplayed] = useState("");
+export default function TypingText({ text, speed = 50 }: { text: string; speed?: number }) { //TypingText takes in a text and speed set to 50 as default. these have a type, text is a string, speed is a number
+  const [displayed, setDisplayed] = useState("");  //React Hook called useState. creating sa variable that can change.
 
   useEffect(() => {
     let i = 0;
@@ -17,4 +17,3 @@ function TypingText({ text, speed = 50 }: { text: string; speed?: number }) {
   return <span style={{ whiteSpace: "pre-line" }}>{displayed}</span>;
 }
 
-export default TypingText;

@@ -7,8 +7,8 @@ function CameraZoom ({zooming}: {zooming:boolean}) {
   const { camera } = useThree()
   useFrame(() => {
     if (zooming) {
-      camera.position.lerp (new THREE.Vector3(0,1,5), 0.5)
-      camera.updateProjectionMatrix
+      camera.position.lerp (new THREE.Vector3(0,1,5), 0.02)
+      camera.updateProjectionMatrix()
     }
   })
   return null
@@ -50,9 +50,10 @@ function LockerModel() {
   );
 }
 
-export default function LockerScene() {
+export default function LockerScene({ zooming = false} : {zooming?: boolean}) {
   return (
     <Canvas camera={{ position: [20, 15, 60], fov: 45 }}>
+      <CameraZoom zooming={zooming}/>
       <directionalLight position={[1, 10, -1]} intensity={1.2} />
       <directionalLight position={[-8, 1, 5]} intensity={0.5} color="#ff4fa3" />
       <directionalLight
