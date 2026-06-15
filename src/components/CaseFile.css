@@ -5,12 +5,18 @@
   align-items: center;
   justify-content: center;
   perspective: 2500px;
+  perspective-origin: 50% 50%;
 }
-
+.hit-area {
+  width: 510px;
+  height: 672px;
+  cursor: pointer;
+}
 .book {
   width: 510px;
   height: 672px;
   position: relative;
+  transform: rotateY(-20deg) rotateX(10deg);
   z-index: 0;
   transition: transform 0.8s ease;
   transform-style: preserve-3d;
@@ -20,7 +26,7 @@
   height: 100%;
   width: 100%;
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   transition: transform 0.8s ease;
   transform-origin: left center;
   transform-style: preserve-3d;
@@ -56,7 +62,7 @@
 }
 
 .book-page {
-  z-index: 2;
+  z-index: 4;
   width: 470px;
   height: 620px;
   position: absolute;
@@ -83,17 +89,20 @@
 }
 
 .evidence {
-  z-index: 1;
+  z-index: 3;
   background-image: url("/public/textures/binding-dark.png");
-  background-color: rgb(169, 103, 50);
+  background-color: #a96732;
   position: absolute;
-  width: 420px;
-  height: 580px;
+  width: 380px;
+  height: 530px;
   top: 37px;
   left: 80px;
-  box-shadow: 10px 1px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 10px 1px 6px rgba(0, 0, 0, 0.3);
   transform: rotate(5deg);
   transition: transform 0.35s ease;
+
+  perspective: 1000px;
+  overflow: visible;
 }
 
 .evidence-content {
@@ -105,6 +114,75 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.evidence-pictures {
+  position: absolute;
+  inset: 0;
+  z-index: 10; /*should be 2*/
+  width: 100%;
+  height: 100%;
+  background-color: pink;
+}
+
+.photo {
+  position: absolute;
+  width: 340px;
+  height: 250px;
+  background-color: rgb(255, 253, 235);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  padding: 12px; 
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Gap between image, label, and tags */
+
+}
+
+.ph1 {
+  bottom: -80px;
+  left: 100px;
+}
+
+.ph2 {
+  bottom: -50px;
+  left: 40px;
+}
+
+.ph3 {
+  bottom: -11px;
+  left: 150px
+}
+
+.image-cont {
+  background-color: black;
+  width: 100%;
+  height: 140px;
+  background-position: top center;
+  background-size: cover;
+  border: 1px solid #3a2e15;
+  
+ 
+}
+
+.img3 {background-image: url(/public/pictures/screenly.png);}
+
+.evidence::after {
+  content: "";
+  position: absolute;
+  bottom: -52px;
+  left: 0;
+  width: 200px;
+  height: 0;
+  border-style: solid;
+  z-index: 1;
+
+  border-width: 55px 90px 0 90px;
+  border-color: rgb(145, 85, 35) transparent transparent transparent;
+  transition:
+    transform 0.6s ease-in-out,
+    z-index 0.6s;
+  filter: drop-shadow(0px -3px 2px rgba(0, 0, 0, 0.4));
 }
 
 .page-content {
@@ -234,12 +312,12 @@
   font-weight: bold;
   color: #7e0606;
 }
-.book:not(.book-open) .cover:hover ~ .book-page {
+.hit-area:hover .book:not(.book-open) .book-page {
   transform: translateX(26px) rotate(1deg);
 }
 
-.book:not(.book-open) .cover:hover ~ .evidence {
-  transform: translateX(26px) rotate(10deg);
+.hit-area:hover .book:not(.book-open) .evidence {
+  transform: translateX(46px) rotate(13deg);
 }
 
 .book.book-open .cover {
@@ -250,9 +328,20 @@
 }
 
 .book.book-open .book-page.slide-left {
-  transform: translateX(-450px);
-  box-shadow: -15px 12px 25px 0px rgba(0, 0, 0, 0.3);
+  transform: translateX(-450px) rotate(-4deg);
+  box-shadow: 2px 4px 13px 0px rgba(0, 0, 0, 0.3);
   transition: transform 0.6s ease;
-  z-index: 4;
+  z-index: 6;
   cursor: default;
+}
+
+.hit-area:has(.book.book-open) {
+  cursor: default;
+}
+/* Optional tweak: slight tilt reaction on hover to feel more interactive */
+.evidence:hover {
+  transform: rotate(2deg) scale(1.02);
+}
+.evidence:hover::after {
+  transform: translateY(2px);
 }
