@@ -553,7 +553,7 @@
   align-items: center;
   font-size: 0.8rem;
   font-weight: 700;
-  color:  #28241e;
+  color: #28241e;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   background-color: rgba(253, 216, 160, 0.85);
@@ -562,8 +562,22 @@
   border: 1px solid rgba(245, 227, 195, 0.3);
   pointer-events: none; /* Prevents text block from intercepting clicks */
   white-space: nowrap;
+
+  /* ADDED ANIMATION PROPERTY */
+  animation: status-pulse 2s infinite ease-in-out;
 }
 
+/* ADDED KEYFRAMES FOR THE PULSING EFFECT */
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 0.7;
+    box-shadow: 0 0 4px rgba(253, 216, 160, 0.3);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(253, 216, 160, 0.8);
+  }
+}
 /* Pulsing Status Dot */
 .printer-pulse-dot {
   width: 6px;

@@ -24,7 +24,7 @@ const PROJECTS: Project[] = [
     name: "Screenly",
     desc: "A full-stack AI-powered resume intelligence platform built with React (TypeScript) and Python. It features a custom PDF parsing pipeline to extract and structure resume data, which is then processed through an LLM via OpenRouter to perform deep candidate analysis against job descriptions.",
     stack: ["React", "TypeScript", "Gemini LLM", "FastAPI"],
-    image: "/public/pictures/screenly.png",
+    image: "./pictures/screenly.png",
     x: 25,
     y: 8,
     rotate: -5,

@@ -172,7 +172,7 @@ export default function ContactPrintout() {
               </label>
               <label className="csf-field">
                 <span>STATEMENT</span>
-                <textarea name="message" required rows={5} placeholder="State your business..." />
+                <textarea name="message" required rows={5} placeholder="Message" />
               </label>
 
               <button
@@ -180,7 +180,7 @@ export default function ContactPrintout() {
                 className={`csf-stamp-button is-${sendState}`}
                 disabled={sendState === 'sending'}
               >
-                {sendState === 'idle' && 'TRANSMIT'}
+                {sendState === 'idle' && 'SEND'}
                 {sendState === 'sending' && 'SENDING…'}
                 {sendState === 'error' && 'RETRY'}
               </button>
