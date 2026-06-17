@@ -326,10 +326,10 @@ export default function CrimeBoard({ triggered }: { triggered: boolean }) {
         })}
 
         {/* Sticky notes */}
-        <div className="sticky sticky-1"><p>check github<br />for source</p></div>
-        <div className="sticky sticky-2"><p>all projects<br />built solo</p></div>
-        <div className="sticky sticky-3"><p>more coming<br />soon...</p></div>
-        <div className="sticky sticky-4"><p>ask about<br />the process</p></div>
+        <div className="sticky sticky-1"><p>Hello there<br />welcome!</p></div>
+        <div className="sticky sticky-2"><p>Who is<br />lenessant?</p></div>
+        <div className="sticky sticky-3"><p>more coming<br />soon !!</p></div>
+        <div className="sticky sticky-4"><p>you can ask about<br />the process of making this</p></div>
 
         <div className="board-label">EVIDENCE BOARD // CASE #304</div>
       </div>
