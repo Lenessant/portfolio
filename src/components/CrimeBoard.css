@@ -174,7 +174,7 @@
 
 .board-photo:hover {
   box-shadow: 3px 6px 18px rgba(0,0,0,0.5),
-              0 0 20px rgba(192, 57, 43, 0.4);
+              0 0 20px rgba(192, 58, 43, 0.918);
 }
 
 .board-photo.fly-in {
@@ -278,12 +278,13 @@
 .sticky-3 { background: #f0b3d9; top: 35%; right: 2%; transform: rotate(-5deg); }
 .sticky-4 { background: #e877b5; bottom: 15%; right: 8%; transform: rotate(3deg); }
 
-/* ── Redacted Doc ── */
+
 /* ── Photo Modal ── */
 .photo-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.411);
+  backdrop-filter: blur(8px);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -293,10 +294,13 @@
 
 .photo-modal {
   background: #fdfbf0;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 6px solid rgb(77, 76, 76);
   border-radius: 8px;
   max-width: 90vw;
   max-height: 90vh;
-  width: 700px;
+  width: 670px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
@@ -318,34 +322,23 @@
 
 .modal-close {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #7a4f2a;
+  font-family: "Jetbrain Mono", monospace;
+  bottom: 10%;
+  font-size: 20px;
+  color: #cecece;
   z-index: 10;
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.modal-close:hover {
-  background: rgba(0, 0, 0, 0.1);
-  transform: rotate(90deg);
-}
 
 .modal-image {
   width: 100%;
   height: 360px;
   background-size: cover;
   background-position: center;
-  background-color: #e8dcc8;
+  box-shadow: 0px 0px 5px #a2a1a1;
 }
 
 .modal-content {
@@ -380,7 +373,7 @@
 }
 
 .modal-tag {
-  background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+  background: linear-gradient(135deg, #501e18 0%, #a93226 100%);
   color: #fdfbf0;
   padding: 4px 10px;
   border-radius: 4px;
@@ -388,23 +381,6 @@
   font-weight: 600;
   letter-spacing: 1px;
   box-shadow: 0 2px 6px rgba(192, 57, 43, 0.3);
-}
-
-.redacted-doc {
-  position: absolute;
-  background: #f0ece0;
-  padding: 12px 14px;
-  width: 110px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
-  font-family: "JetBrains Mono", monospace;
-  z-index: 6;
-  border: 1px solid #d4c89a;
-  bottom: 6%;
-  right: 5%;
-  transform: rotate(2deg);
 }
 
 .redact-line { height: 7px; background: #2a1f0a; border-radius: 1px; }

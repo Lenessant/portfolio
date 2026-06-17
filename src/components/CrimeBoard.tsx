@@ -18,8 +18,8 @@ const PROJECTS: Project[] = [
   {
     id: 1,
     name: "Screenly",
-    desc: "AI resume/CV screening tool",
-    stack: ["REACT", "NODEJS"],
+    desc: "A full-stack AI-powered resume intelligence platform built with React (TypeScript) and Python. It features a custom PDF parsing pipeline to extract and structure resume data, which is then processed through an LLM via OpenRouter to perform deep candidate analysis against job descriptions.",
+    stack: ["React", "TypeScript", "Gemini LLM", "FastAPI"],
     image: "/public/pictures/screenly.png",
     x: 5,
     y: 8,
@@ -28,9 +28,9 @@ const PROJECTS: Project[] = [
   },
   {
     id: 2,
-    name: "Dengueng",
-    desc: "Dengue tracking dashboard",
-    stack: ["REACT", "POSTGRESQL"],
+    name: "DenGuard",
+    desc: "An AI-driven dengue fever prediction and early warning system for General Santos City using a hybrid deep learning model combining Graph Neural Networks (GNN), LSTM, and attention mechanisms. It leverages historical dengue cases and environmental data to forecast weekly incidence and classify alert levels, supported by a React-based dashboard for visualization and monitoring.",
+    stack: ["REACT", "TypeScript", "Python", "Pytorch", "LSTM", "GNN", "Attention Mechanism", "Data Preprocessing"],
     image: "/public/pictures/dengueng.png",
     x: 50,
     y: 5,
@@ -39,9 +39,10 @@ const PROJECTS: Project[] = [
   },
   {
     id: 3,
-    name: "Project Alpha",
-    desc: "Deep learning image classifier",
-    stack: ["PYTORCH", "PYTHON"],
+    name: "Papoi: A Wellness App",
+    desc: "Papoi is a lightweight wellness and morning motivation app designed to help users start their day with positivity and intention. Built as a Progressive Web App (PWA), it delivers daily motivational content and a seamless mobile-friendly experience while storing user preferences locally for fast, offline-accessible use.",
+    stack: ["React", "TypeScript", "Tailwind CSS", "Progressive Web App (PWA)"],
+    image: "/public/pictures/papoi.png",
     x: 70,
     y: 45,
     rotate: -3,
@@ -49,9 +50,10 @@ const PROJECTS: Project[] = [
   },
   {
     id: 4,
-    name: "Project Beta",
-    desc: "Real-time chat application",
-    stack: ["NODEJS", "TYPESCRIPT"],
+    name: "Pixel Pomodoro",
+    desc: "Pixel Pomodoro is a desktop productivity timer inspired by the Pomodoro Technique, featuring a charming medieval pixel-art aesthetic. Designed to make focus sessions more engaging,",
+    stack: ["React", "TypeScript", "Tauri"],
+    image: "/public/pictures/pixelpomo.png",
     x: 8,
     y: 55,
     rotate: 6,
@@ -59,9 +61,10 @@ const PROJECTS: Project[] = [
   },
   {
     id: 5,
-    name: "Project Gamma",
-    desc: "E-commerce platform",
-    stack: ["REACT", "MYSQL", "EXPRESS"],
+    name: "PlainContract",
+    desc: "PlainContract is an AI-powered contract analysis tool that helps users understand complex legal documents in plain language. By leveraging LLMs, it summarizes key clauses, highlights important obligations and risks, and translates legal jargon into clear, actionable insights, making contracts more accessible to non-legal users.",
+    stack: ["React", "TypeScript", "Gemini LLM"],
+    image: "/public/pictures/plaincontract.png",
     x: 35,
     y: 65,
     rotate: -4,
@@ -77,8 +80,6 @@ function droopyPath(x1: number, y1: number, x2: number, y2: number): string {
 }
 
 export default function CrimeBoard({ triggered }: { triggered: boolean }) {
-
-
   const boardRef = useRef<HTMLDivElement>(null);
 
   // Photo positions
@@ -179,6 +180,7 @@ export default function CrimeBoard({ triggered }: { triggered: boolean }) {
   return (
     <div className={`crime-board ${triggered ? "board-visible" : ""}`}>
       {/* ── Section Header ── */}
+
       <div className="section-header">
         <div className="section-pill">INTERACTIVE DECISION BOARD // CLUES</div>
         <h2 className="section-title">The Projects Corkboard</h2>
@@ -249,14 +251,6 @@ export default function CrimeBoard({ triggered }: { triggered: boolean }) {
                 style={p.image ? { backgroundImage: `url(${p.image})` } : {}}
               />
               <div className="board-photo-name">{p.name}</div>
-              <div className="board-photo-desc">{p.desc}</div>
-              <div className="board-photo-tags">
-                {p.stack.map((t) => (
-                  <span key={t} className="board-tag">
-                    {t}
-                  </span>
-                ))}
-              </div>
             </>
           );
           const cls = `board-photo ${landed[i] ? "landed" : "fly-in"} ${draggingPhoto.current === i ? "dragging" : ""}`;
@@ -277,7 +271,11 @@ export default function CrimeBoard({ triggered }: { triggered: boolean }) {
               style={sty}
               initial={{ rotate: 90 + [-15, 12, -8][i] }}
               animate={{ rotate: p.rotate }}
-              transition={isDragging ? { duration: 0 } : { type: "spring", stiffness: 80, damping: 14 }}
+              transition={
+                isDragging
+                  ? { duration: 0 }
+                  : { type: "spring", stiffness: 80, damping: 14 }
+              }
               onMouseDown={(e) => onPhotoMouseDown(e, i)}
             >
               {content}
@@ -324,14 +322,6 @@ export default function CrimeBoard({ triggered }: { triggered: boolean }) {
         </div>
 
         {/* Redacted doc */}
-        <div className="redacted-doc">
-          <div className="redact-line" />
-          <div className="redact-line short" />
-          <div className="redact-bar" />
-          <div className="redact-line" />
-          <div className="redact-line short" />
-          <div className="redact-stamp">CLASSIFIED</div>
-        </div>
 
         <div className="board-label">EVIDENCE BOARD // CASE #304</div>
       </div>
@@ -342,13 +332,9 @@ export default function CrimeBoard({ triggered }: { triggered: boolean }) {
           className="photo-modal-overlay"
           onClick={() => setSelectedPhoto(null)}
         >
+          <p className="modal-close">click anywhere to exit</p>
+
           <div className="photo-modal" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="modal-close"
-              onClick={() => setSelectedPhoto(null)}
-            >
-              ✕
-            </button>
             <div
               className="modal-image"
               style={
