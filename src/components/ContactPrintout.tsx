@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import './ContactPrintout.css';
-import { div } from 'motion/react-client';
 
 const SERVICE_ID = 'service_iwenqjq';
 const TEMPLATE_ID = 'template_rpnzp1u';
