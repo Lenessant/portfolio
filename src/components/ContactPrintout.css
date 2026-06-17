@@ -1,0 +1,493 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Special+Elite&display=swap');
+
+.csf-contact {
+  --bg: #15130f;
+  --paper: #ece4cf;
+  --paper-edge: #cfc2a0;
+  --ink: #2a2620;
+  --red: #9c2b2b;
+  --red-deep: #7a2020;
+  --amber: #d6a44e;
+  --metal: #2c2924;
+  --metal-light: #45413a;
+  --metal-edge: #565049;
+
+  position: relative;
+  font-family: 'Share Tech Mono', monospace;
+  isolation: isolate;
+  margin-top: 7rem;
+
+  width: 100%;
+  min-height: 100vh; 
+  box-sizing: border-box;
+  padding-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.csf-contact__scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+
+.csf-contact__grid {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .csf-contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Case Tag Element ---------- */
+.csf-case-tag {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--amber);
+  border-bottom: 1px dashed var(--metal-edge);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.4rem;
+}
+
+/* ---------- LEFT PANEL: Hardware Printer Block ---------- */
+.csf-printer-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.csf-printer {
+  position: relative;
+  width: 100%;
+}
+
+.csf-printer__body {
+  position: relative;
+  background: linear-gradient(180deg, var(--metal-light), var(--metal));
+  border: 1px solid var(--metal-edge);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  z-index: 10; /* Keeps printer frame sitting completely over exiting paper sheets */
+}
+
+.csf-printer__led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--metal-edge);
+  flex-shrink: 0;
+}
+
+.csf-printer__led.is-active {
+  background: var(--red);
+  box-shadow: 0 0 8px var(--red);
+  animation: csf-blink 1s steps(2, jump-none) infinite;
+}
+
+.csf-printer__head {
+  position: relative;
+  height: 3px;
+  flex: 1;
+  background: var(--metal-edge);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.csf-printer__head::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14%;
+  height: 100%;
+  background: var(--amber);
+  border-radius: 2px;
+}
+
+.csf-printer__head.is-scanning::after {
+  animation: csf-scan 1.6s ease-in-out infinite;
+}
+
+.csf-printer__slot {
+  width: 28px;
+  height: 6px;
+  background: var(--bg);
+  border-radius: 3px;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+}
+
+/* ---------- MECHANICAL PAPER SLOT MASKING CONTEXT ---------- */
+.csf-paper-output-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden; 
+  padding-bottom: 30px; 
+}
+
+.csf-paper {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  width: 92%;
+  margin: 0 auto;
+  margin-top: -2px;
+  padding: 2.2rem 2.2rem 2.8rem 3.4rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+
+  /* Baseline configuration before intersection scroll events trigger */
+  max-height: 0px;
+  opacity: 0;
+  transform: translateY(-100%);
+  transform-origin: top center;
+}
+
+.csf-paper.is-feeding {
+  animation: csf-mechanical-feed-timeline 7.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes csf-mechanical-feed-timeline {
+  0% {
+    max-height: 0px;
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    max-height: 700px; 
+    opacity: 1;
+    transform: translateY(0);
+    overflow: visible; 
+  }
+}
+
+/* ---------- Data Content Text Formatting ---------- */
+.csf-paper__line {
+  display: flex;
+  align-items: flex-start;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  margin: 0 0 1.1rem 0;
+  white-space: pre-wrap;
+  font-family: 'Share Tech Mono', monospace;
+  opacity: 0;
+}
+
+.csf-paper.is-feeding .csf-paper__line {
+  animation: csf-line-fade 0.5s ease-out forwards;
+}
+
+/* Tabular staggered delay transitions */
+.csf-paper.is-feeding .csf-paper__line:nth-child(1) { animation-delay: 0.3s; }
+.csf-paper.is-feeding .csf-paper__line:nth-child(2) { animation-delay: 0.4s; }
+.csf-paper.is-feeding .csf-paper__line:nth-child(3) { animation-delay: 0.5s; }
+.csf-paper.is-feeding .csf-paper__line:nth-child(4) { animation-delay: 0.6s; }
+.csf-paper.is-feeding .csf-paper__line:nth-child(5) { animation-delay: 0.7s; }
+.csf-paper.is-feeding .csf-paper__line:nth-child(6) { animation-delay: 0.8s; }
+.csf-paper.is-feeding .csf-paper__line:nth-child(7) { animation-delay: 0.9s; }
+
+@keyframes csf-line-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.csf-paper__label {
+  display: inline-block;
+  width: 115px;
+  font-weight: 600;
+  color: var(--ink);
+  opacity: 0.6;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.csf-paper__value {
+  color: var(--ink);
+  flex: 1;
+}
+
+/* ---------- CLEAN VISUAL LINK UPDATES ---------- */
+.csf-print-link {
+  color: var(--red);
+  text-decoration: none;
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  transition: color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.csf-print-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px dashed var(--red);
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+.csf-print-link:hover {
+  color: var(--red-deep);
+}
+
+.csf-print-link:hover::after {
+  border-bottom-style: solid;
+  opacity: 1;
+}
+
+.csf-stamp {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.2rem;
+  border: 3px double var(--red);
+  color: var(--red);
+  font-family: 'Special Elite', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  padding: 0.35rem 0.7rem;
+  transform: rotate(-8deg);
+  opacity: 0;
+}
+
+.csf-paper.is-feeding .csf-stamp {
+  animation: csf-stamp-in 0.35s ease-out forwards;
+  animation-delay: 1.2s; /* Reveals smoothly after last row animations conclude */
+}
+
+/* ---------- RIGHT PANEL: Intake Document UI ---------- */
+.csf-intake-panel {
+  position: relative;
+  width: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1.8rem clamp(1.4rem, 3vw, 2.4rem);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.csf-intake-clip {
+  position: absolute;
+  top: -10px;
+  left: 1.6rem;
+  width: 22px;
+  height: 38px;
+  border: 4px solid var(--metal-edge);
+  border-radius: 11px;
+  background: transparent;
+  box-shadow: inset 0 0 0 4px var(--paper);
+}
+
+.csf-intake__title {
+  font-family: 'Special Elite', monospace;
+  font-size: 1.8rem;
+  margin: 0.6rem 0 0.3rem;
+  letter-spacing: -0.02em;
+}
+
+.csf-intake__sub {
+  font-size: 0.85rem;
+  color: #5a5346;
+  margin: 0 0 1.4rem;
+}
+
+.csf-intake-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.csf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-weight: bold;
+  font-family: 'JetBrains', monospace;
+  font-size: 0.9rem;
+
+  color: #35322b;
+}
+
+.csf-field input,
+.csf-field textarea {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--paper-edge);
+  padding: 0.4rem 0.1rem;
+  resize: vertical;
+}
+
+.csf-field input:focus-visible,
+.csf-field textarea:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* ---------- Terminal Action Buttons ---------- */
+.csf-stamp-button {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: var(--red);
+  background: transparent;
+  border: 3px double var(--red);
+  padding: 0.55rem 1.3rem;
+  cursor: pointer;
+  transform: rotate(-2deg);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.csf-stamp-button:hover:not(:disabled) {
+  background: var(--red);
+  color: var(--paper);
+}
+
+.csf-stamp-button:active:not(:disabled) {
+  transform: rotate(-2deg) scale(0.94);
+}
+
+.csf-stamp-button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+.csf-stamp-button.is-sending {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+/* SUCCESS TERMINAL SCREEN LAYOUT */
+.csf-success-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  animation: csf-success-reveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.csf-success-title {
+  font-family: 'Special Elite', monospace;
+  font-size: 1.3rem;
+  color: var(--red);
+  margin: 0 0 0.8rem 0;
+  letter-spacing: 0.05em;
+}
+
+.csf-status-icon {
+  font-size: 2rem;
+  color: var(--red);
+  border: 3px double var(--red);
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  font-family: 'Special Elite', monospace;
+  transform: rotate(4deg);
+}
+
+.csf-stamp-button.is-reset {
+  margin-top: 1.8rem;
+  align-self: center;
+  transform: rotate(1deg);
+}
+
+.csf-stamp-button.is-reset:active {
+  transform: rotate(1deg) scale(0.95);
+}
+
+/* ---------- Technical Keyframe Set ---------- */
+@keyframes csf-scan {
+  0% { left: 0%; }
+  50% { left: 86%; }
+  100% { left: 0%; }
+}
+
+@keyframes csf-blink {
+  50% { opacity: 0.15; }
+}
+
+@keyframes csf-stamp-in {
+  from {
+    opacity: 0;
+    transform: rotate(-8deg) scale(1.4);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-8deg) scale(1);
+  }
+}
+
+@keyframes csf-success-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ---------- Accessibility Fallback Blocks ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .csf-contact * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .csf-paper {
+    max-height: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .csf-paper__line {
+    opacity: 1 !important;
+  }
+  .csf-stamp {
+    opacity: 1 !important;
+  }
+}

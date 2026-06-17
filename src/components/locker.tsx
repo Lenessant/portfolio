@@ -4,12 +4,13 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 
-const TARGET_POSITION = new THREE.Vector3 (0, 1, 5)
+const TARGET_POSITION = new THREE.Vector3 (15, 10, 123)
 function CameraZoom ({zooming}: {zooming:boolean}) {
   const { camera } = useThree()
   useFrame(() => {
     if (zooming) {
-      camera.position.lerp (TARGET_POSITION, 0.02)
+      camera.position.lerp (TARGET_POSITION, 0.01)
+    
       camera.updateProjectionMatrix()
     }
   })

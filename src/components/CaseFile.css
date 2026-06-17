@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+
 .book-scene {
   width: 100%;
   height: 100%;
@@ -20,6 +21,8 @@
   transition: transform 0.8s ease;
   transform-style: preserve-3d;
 }
+
+
 
 .cover {
   height: 100%;
@@ -86,7 +89,18 @@
     linear-gradient(160deg, #f1e9da 0%, #e6dcc8 50%, #ede4d3 100%);
   cursor: pointer;
 }
+.floating-instruction {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--amber, #a41010);
+  letter-spacing: 0.05em;
+  animation: pulse-glow 2s infinite ease-in-out;
+}
 
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; text-shadow: 0 0 2px rgba(214, 164, 78, 0.2); }
+  50% { opacity: 1; text-shadow: 0 0 8px rgba(214, 164, 78, 0.6); }
+}
 .evidence {
   z-index: 3;
   background-image: url("/public/textures/binding-dark.png");
@@ -313,19 +327,23 @@
   font-weight: bold;
   color: #7e0606;
 }
-.hit-area:hover .book:not(.book-open) .book-page {
+.book:not(.book-open):hover .book-page {
   transform: translateX(26px) rotate(1deg);
 }
 
-.hit-area:hover .book:not(.book-open) .evidence {
+ .book:not(.book-open):hover .evidence {
   transform: translateX(46px) rotate(13deg);
 }
+
+
 
 .book.book-open .cover {
   transform: rotateY(-180deg);
 }
 .book.book-open {
   transform: translateX(200px);
+  animation: none;
+  opacity: 1;
 }
 .hit-area:has(.book.book-open) {
   cursor: default;
@@ -339,7 +357,6 @@
 }
 
 
-/* Optional tweak: slight tilt reaction on hover to feel more interactive */
 .evidence:hover ~ .evidence-back{
   transform: rotate(2deg) scale(1.02);
 }

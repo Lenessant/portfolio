@@ -49,7 +49,6 @@ export default function CaseFile({
       </div>
 
       <div className="book-scene">
-  
           <div className={`book ${open ? "book-open" : ""}`}>
             <div className="cover" onClick={() => setOpen(true)}>
               <div
@@ -62,6 +61,7 @@ export default function CaseFile({
               className={`book-page ${slide ? "slide-left" : ""}`}
               onClick={() => setSlide(true)}
             >
+              
               <div className="page-content">
                 <div className="page-header">
                   <div className="page-stamp">CLASSIFIED</div>
@@ -114,9 +114,11 @@ export default function CaseFile({
                     <div className="tag">TAILWIND CSS</div>
                   </div>
                 </div>
+                
                 <div className="page-footer">
+                  <div className="floating-instruction">CLICK TO PULL ASIDE</div>
                   <span>STATUS: ACTIVE</span>
-                  <span>CLEARANCE: L5</span>
+              
                   <span>FILE #304</span>
                 </div>
               </div>

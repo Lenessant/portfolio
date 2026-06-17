@@ -3,6 +3,7 @@ import "./App.css";
 import LockerScene from "./components/Locker";
 import CaseFile from "./components/CaseFile";
 import CrimeBoard from "./components/CrimeBoard";
+import Contract from "./components/ContactPrintout"
 import { LayoutGroup } from "motion/react";
 
 function App() {
@@ -31,9 +32,7 @@ function App() {
         </div>
 
         {(stage === "idle" || stage === "zooming" || stage === "black") && (
-          <div
-            className={`locker ${stage !== "idle" ? "locker-fullscreen" : ""}`}
-          >
+          <div className="locker">
             <LockerScene zooming={stage === "zooming" || stage === "black"} />
           </div>
         )}
@@ -59,8 +58,6 @@ function App() {
               />
             </div>
           )}
-
-          {boardTriggered && <CrimeBoard triggered={boardTriggered} />}
         </LayoutGroup>
 
         {stage === "idle" && (
@@ -74,6 +71,9 @@ function App() {
 
       {/* CRIME BOARD — appears below locker stage */}
       {boardTriggered && <CrimeBoard triggered={boardTriggered} />}
+
+      {/* CONTACT PRINTOUT — appears after crime board */}
+      {boardTriggered && <Contract />}
     </div>
   );
 }
