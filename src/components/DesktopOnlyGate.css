@@ -1,0 +1,50 @@
+/* DesktopOnlyGate.css */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
+
+.csf-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #1c1a16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.2rem;
+}
+
+.csf-gate__note {
+  position: relative;
+  background: #f3ecd9;
+  color: #2a2620;
+  max-width: 320px;
+  padding: 2.4rem 1.8rem 2rem;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  transform: rotate(-1.5deg);
+}
+
+.csf-gate__pin {
+  position: absolute;
+  top: calc(50% - 142px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e08a8a, #9c2b2b 65%);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.csf-gate__message {
+  font-family: 'Caveat', cursive;
+  font-size: 1.7rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+@media (max-width: 380px) {
+  .csf-gate__note { max-width: 260px; }
+  .csf-gate__message { font-size: 1.5rem; }
+}

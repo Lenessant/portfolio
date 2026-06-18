@@ -4,6 +4,7 @@ import LockerScene from "./components/Locker";
 import CaseFile from "./components/CaseFile";
 import CrimeBoard from "./components/CrimeBoard";
 import Contract from "./components/ContactPrintout"
+import DesktopOnlyGate from "./components/DesktopOnlyGate";
 import { LayoutGroup } from "motion/react";
 
 function App() {
@@ -20,61 +21,63 @@ function App() {
   };
 
   return (
-    <div className="page">
-      {/* LOCKER STAGE — always exactly 100vh */}
-      <div className="locker-stage">
-        <div className="section-header">
-          <h2 className="section-title">The Profile is in the Locker</h2>
-          <p className="section-desc">
-            Examine the locker and <strong>unlock the vault</strong> to retrieve
-            confidential developer files.
-          </p>
-        </div>
-
-        {(stage === "idle" || stage === "zooming" || stage === "black") && (
-          <div className="locker">
-            <LockerScene zooming={stage === "zooming" || stage === "black"} />
+    <DesktopOnlyGate>
+      <div className="page">
+        {/* LOCKER STAGE — always exactly 100vh */}
+        <div className="locker-stage">
+          <div className="section-header">
+            <h2 className="section-title">The Profile is in the Locker</h2>
+            <p className="section-desc">
+              Examine the locker and <strong>unlock the vault</strong> to retrieve
+              confidential developer files.
+            </p>
           </div>
-        )}
 
-        {(stage === "black" || (stage === "file" && !boardTriggered)) && (
-          <div className="black-screen" />
-        )}
-
-        <LayoutGroup>
-          {stage === "file" && (
-            <div
-              className={`file-reveal ${boardTriggered ? "file-reveal-up" : ""}`}
-            >
-              <CaseFile
-                onEvidenceClick={() => {
-                  setBoardTriggered(true);
-                  setTimeout(() => {
-                    document
-                      .querySelector(".crime-board")
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }, 100);
-                }}
-              />
+          {(stage === "idle" || stage === "zooming" || stage === "black") && (
+            <div className="locker">
+              <LockerScene zooming={stage === "zooming" || stage === "black"} />
             </div>
           )}
-        </LayoutGroup>
 
-        {stage === "idle" && (
-          <div className="bottom-action">
-            <button className="open" onClick={handleOpen}>
-              [ Unlock ]
-            </button>
-          </div>
-        )}
+          {(stage === "black" || (stage === "file" && !boardTriggered)) && (
+            <div className="black-screen" />
+          )}
+
+          <LayoutGroup>
+            {stage === "file" && (
+              <div
+                className={`file-reveal ${boardTriggered ? "file-reveal-up" : ""}`}
+              >
+                <CaseFile
+                  onEvidenceClick={() => {
+                    setBoardTriggered(true);
+                    setTimeout(() => {
+                      document
+                        .querySelector(".crime-board")
+                        ?.scrollIntoView({ behavior: "smooth" });
+                    }, 100);
+                  }}
+                />
+              </div>
+            )}
+          </LayoutGroup>
+
+          {stage === "idle" && (
+            <div className="bottom-action">
+              <button className="open" onClick={handleOpen}>
+                [ Unlock ]
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* CRIME BOARD — appears below locker stage */}
+        {boardTriggered && <CrimeBoard triggered={boardTriggered} />}
+
+        {/* CONTACT PRINTOUT — appears after crime board */}
+        {boardTriggered && <Contract />}
       </div>
-
-      {/* CRIME BOARD — appears below locker stage */}
-      {boardTriggered && <CrimeBoard triggered={boardTriggered} />}
-
-      {/* CONTACT PRINTOUT — appears after crime board */}
-      {boardTriggered && <Contract />}
-    </div>
+    </DesktopOnlyGate>
   );
 }
 

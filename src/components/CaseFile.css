@@ -50,7 +50,7 @@
   backface-visibility: hidden;
   position: absolute;
   clip-path: url(#caseFileShapeMirrored);
-  background-image: url("/public/textures/binding-dark.png");
+  background-image: url("/textures/binding-dark.png");
   background-color: #c38f63;
   inset: 0;
   transform: rotateY(180deg);
