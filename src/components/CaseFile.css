@@ -30,6 +30,7 @@
   width: 100%;
   position: absolute;
   z-index: 5;
+  
   transition: transform 0.8s ease;
   transform-origin: left center;
   transform-style: preserve-3d;
@@ -38,6 +39,7 @@
 .cover-front {
   position: absolute;
   clip-path: url(#caseFileShape);
+  background-color: #c38f63;
   inset: 0;
   background-size: cover;
   background-position: center;
@@ -350,10 +352,11 @@
   cursor: default;
 }
 .book.book-open .book-page.slide-left {
-transform: translateX(-450px) rotate(-4deg) translateZ(1px);
+transform: translateX(-450px) rotate(-4deg) ;
   box-shadow: 2px 4px 13px 0px rgba(0, 0, 0, 0.3);
   transition: transform 0.6s ease;
   cursor: default;
+  z-index: 6;
   /* Tlls the hardware graphics card to prepare for a clean, non-glitching movement */
   will-change: transform;
 }
