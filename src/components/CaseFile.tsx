@@ -132,7 +132,7 @@ export default function CaseFile({
             onClick={handleEvidenceClick}>
               <div className="evidence-content">
                 <div className="e-label">EVIDENCE</div>
-                <div className="sub-label">contains Lene's Projects</div>
+                <div className="sub-label">MY PROJECTS</div>
               </div>
             </div>
 
