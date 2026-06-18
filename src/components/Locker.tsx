@@ -3,25 +3,23 @@ import { useGLTF, OrbitControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
+const TARGET_POSITION = new THREE.Vector3(15, 10, 123);
 
-const TARGET_POSITION = new THREE.Vector3 (15, 10, 123)
-function CameraZoom ({zooming}: {zooming:boolean}) {
-  const { camera } = useThree()
+function CameraZoom({ zooming }: { zooming: boolean }) {
+  const { camera } = useThree();
   useFrame(() => {
     if (zooming) {
-      camera.position.lerp (TARGET_POSITION, 0.01)
-    
-      camera.updateProjectionMatrix()
+      camera.position.lerp(TARGET_POSITION, 0.01);
+      camera.updateProjectionMatrix();
     }
-  })
-  return null
+  });
+  return null;
 }
 
 function LockerModel() {
   const { scene } = useGLTF("/models/lockers.glb");
   const groupRef = useRef<THREE.Group>(null);
-
-  const startTime = useRef(performance.now())
+  const startTime = useRef(performance.now());
 
   useEffect(() => {
     scene.traverse((child) => {
@@ -39,10 +37,10 @@ function LockerModel() {
       groupRef.current.rotation.y = -0.3 + Math.sin(t * 0.5) * 0.03;
       groupRef.current.rotation.x = Math.sin(t * 1) * 0.04;
 
-      const elapsed = (performance.now() - startTime.current) / 1000
-      const introProgress = Math.min (elapsed / 0.8, 1)
-      const eased = 1 - Math.pow (1 - introProgress, 3)
-      groupRef.current.scale.setScalar(0.5*eased)
+      const elapsed = (performance.now() - startTime.current) / 1000;
+      const introProgress = Math.min(elapsed / 0.8, 1);
+      const eased = 1 - Math.pow(1 - introProgress, 3);
+      groupRef.current.scale.setScalar(0.5 * eased);
     }
   });
 
@@ -53,21 +51,52 @@ function LockerModel() {
   );
 }
 
-export default function LockerScene({ zooming = false} : {zooming?: boolean}) {
+export default function LockerScene({ zooming = false }: { zooming?: boolean }) {
   return (
-    <Canvas camera={{ position: [20, 15, 60], fov: 45 }}>
-      <CameraZoom zooming={zooming}/>
-      <directionalLight position={[1, 10, -1]} intensity={1.2} />
-      <directionalLight position={[-8, 1, 5]} intensity={0.5} color="#ff4fa3" />
-      <directionalLight
-        position={[-10, -4, 2]}
-        intensity={0.6}
-        color="#45d8f2"
-      />
-      <ambientLight intensity={0.03} />
-      <LockerModel />
-      <OrbitControls enableZoom={false} />
-    </Canvas>
+    <div style={{ width: "100%", height: "100%", position: "relative" }}>
+      <Canvas camera={{ position: [20, 15, 60], fov: 45 }}>
+        <CameraZoom zooming={zooming} />
+        <directionalLight position={[1, 10, -1]} intensity={1.2} />
+        <directionalLight position={[-8, 1, 5]} intensity={0.5} color="#ff4fa3" />
+        <directionalLight position={[-10, -4, 2]} intensity={0.6} color="#45d8f2" />
+        <ambientLight intensity={0.03} />
+        <LockerModel />
+        <OrbitControls enableZoom={false} />
+      </Canvas>
+
+      {/* Required Asset Attribution Tag */}
+      <div 
+        className="asset-attribution"
+        style={{
+          position: "absolute",
+          bottom: "10px",
+          right: "15px",
+          fontFamily: "'Share Tech Mono', monospace",
+          fontSize: "0.65rem",
+          color: "rgba(255, 255, 255, 0.3)",
+          zIndex: 10,
+          pointerEvents: "auto"
+        }}
+      >
+        <a 
+          href="https://skfb.ly/otIYX" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{ color: "inherit", textDecoration: "underline" }}
+        >
+          "Lockers"
+        </a>{" "}
+        by Proj_Big _Brain under{" "}
+        <a 
+          href="http://creativecommons.org/licenses/by/4.0/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{ color: "inherit", textDecoration: "underline" }}
+        >
+          CC BY 4.0
+        </a>
+      </div>
+    </div>
   );
 }
 
