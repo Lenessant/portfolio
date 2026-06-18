@@ -5,11 +5,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        // Automatically separates heavy node_modules files into a vendor bundle
+        // This splits your heavy 3D rendering engines into separate vendor files
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            if (id.includes('three') || id.includes('@react-three')) {
+              return 'three-vendor';
+            }
             return 'vendor';
           }
         }

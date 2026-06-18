@@ -20,6 +20,7 @@
   z-index: 0;
   transition: transform 0.8s ease;
   transform-style: preserve-3d;
+  isolation: isolate;
 }
 
 
@@ -349,11 +350,12 @@
   cursor: default;
 }
 .book.book-open .book-page.slide-left {
-  transform: translateX(-450px) rotate(-4deg);
+transform: translateX(-450px) rotate(-4deg) translateZ(1px);
   box-shadow: 2px 4px 13px 0px rgba(0, 0, 0, 0.3);
   transition: transform 0.6s ease;
-  z-index: 6;
   cursor: default;
+  /* Tlls the hardware graphics card to prepare for a clean, non-glitching movement */
+  will-change: transform;
 }
 
 
