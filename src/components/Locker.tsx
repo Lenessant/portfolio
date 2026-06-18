@@ -19,7 +19,6 @@ function CameraZoom({ zooming }: { zooming: boolean }) {
 function LockerModel() {
   const { scene } = useGLTF("/models/lockers.glb");
   const groupRef = useRef<THREE.Group>(null);
-  const startTime = useRef(performance.now());
 
   useEffect(() => {
     scene.traverse((child) => {
