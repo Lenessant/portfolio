@@ -92,7 +92,7 @@
 }
 
 .center-paper {
-  width: 140px;
+  width: 180px;
   background: #fdfbf0;
   padding: 12px 14px;
   font-family: "JetBrains Mono", monospace;
@@ -105,21 +105,21 @@
 }
 
 .center-stamp {
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   letter-spacing: 3px;
   color: #c40c0c;
   opacity: 0.7;
 }
 
 .center-name {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: 2px;
   color: #2a1f0a;
 }
 
 .center-aka {
-  font-size: 0.55rem;
+  font-size: 0.8rem;
   letter-spacing: 1.5px;
   color: #7a6030;
   font-style: italic;
@@ -132,7 +132,7 @@
 }
 
 .center-status {
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   letter-spacing: 2px;
   color: #3a7a3a;
 }
@@ -226,7 +226,7 @@
 }
 
 .board-photo-name {
-  font-size: 0.7rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 1.5px;
   color: #2a1f0a;
@@ -344,7 +344,7 @@
 
 .modal-content h2 {
   margin: 0;
-  font-size: rem;
+  font-size: 2rem;
   color: #1a0f05;
   font-weight: 800;
   font-family: "Special Elite", serif;
@@ -519,15 +519,15 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.6rem;
+  gap: 1rem;
   z-index: 999; /* Keeps HUD action floating clearly above evidence items */
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Jetbrains Mono', monospace;
 }
 
 /* Informative Top Notification Label */
 .floating-printer-tooltip {
-  background: #ece4cf; /* var(--paper) color compatibility matching */
-  color: #2a2620; /* var(--ink) */
+  background: #ece4cf; 
+  color: #2a2620; 
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.45rem 0.8rem;
@@ -538,10 +538,9 @@
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   pointer-events: none;
   
-  /* Animated floating breath effect */
   animation: printerHUDOverlayFloat 3s ease-in-out infinite;
 }
 
@@ -549,14 +548,14 @@
   font-family: 'JetBrains Monospace', monospace;
   flex-direction: row;
   display: flex;
-  gap: 8px;
+  gap: 16px;
   align-items: center;
   font-size: 0.8rem;
   font-weight: 700;
   color: #28241e;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  background-color: rgba(253, 216, 160, 0.85);
+  background-color: rgba(255, 255, 255, 0.85);
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   border: 1px solid rgba(245, 227, 195, 0.3);
@@ -571,11 +570,11 @@
 @keyframes status-pulse {
   0%, 100% {
     opacity: 0.7;
-    box-shadow: 0 0 4px rgba(253, 216, 160, 0.3);
+    box-shadow: 0 0 4px rgba(253, 216, 160, 0.116);
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 12px rgba(253, 216, 160, 0.8);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
   }
 }
 /* Pulsing Status Dot */
@@ -591,9 +590,9 @@
 /* Action Button Core Elements */
 .floating-printer-btn {
   background: linear-gradient(180deg, #45413a, #2c2924); /* Matches --metal system color */
-  color: #d6a44e; /* var(--amber) active font tint */
+  color: #dbd8d1; /* var(--amber) active font tint */
   border: 1px solid #565049; /* var(--metal-edge) */
-  border-radius: 50px;
+  border-radius: 60px;
   padding: 0.7rem 1.4rem;
   display: flex;
   align-items: center;
@@ -606,7 +605,7 @@
 .printer-icon-svg {
   width: 17px;
   height: 17px;
-  color: #d6a44e;
+  color: #dbd8d1;
   transition: transform 0.2s ease;
 }
 

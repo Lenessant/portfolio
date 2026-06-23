@@ -30,7 +30,7 @@ const PROJECTS: Project[] = [
     rotate: -5,
     flyIn: true,
     status: "Active",
-    liveUrl: "https://screenly-7pq9tdmey-lenessants-projects.vercel.app/",
+    liveUrl: "https://screenly-eight.vercel.app/",
   },
   {
     id: 2,
@@ -79,7 +79,7 @@ const PROJECTS: Project[] = [
     y: 24,
     rotate: 6,
     flyIn: false,
-    liveUrl: "https://github.com/Lenessant/Scholarly-Hour-Pomodoro-Pixel-/releases/tag/v0.1.0"
+    liveUrl: "https://github.com/Lenessant/Scholarly-Hour-Pomodoro-Pixel-/releases"
   },
   {
     id: 5,
