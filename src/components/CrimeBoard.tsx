@@ -62,9 +62,9 @@ const PROJECTS: Project[] = [
     stack: ["React", "TypeScript", "Tailwind CSS", "Progressive Web App (PWA)"],
     image: "./pictures/papoi.png",
     category: "Best viewed on Mobile",
-    x: 67,
-    y: 55,
-    rotate: -3,
+    x: 63,
+    y: 52,
+    rotate: 4,
     flyIn: true,
     liveUrl: "https://papoi-app.vercel.app/home",
   },
@@ -88,7 +88,7 @@ const PROJECTS: Project[] = [
     stack: ["React", "TypeScript", "Gemini LLM"],
     image: "./pictures/plaincontract.png",
     liveUrl: "https://plaincontract-demo-mode-75619502478.europe-west2.run.app",
-    x: 35,
+    x: 39,
     y: 65,
     rotate: -4,
     flyIn: false,
@@ -100,8 +100,8 @@ const PROJECTS: Project[] = [
     desc: "A personal portfolio website designed and developed to showcase projects, technical skills, and experience as a full-stack developer. Built with a focus on smooth interactions, and responsive design to provide an engaging developer profile and project showcase.",
     stack: ["React", "TypeScript"],
     image: "./pictures/portfolio.png",
-    x: 10,
-    y: 65,
+    x: 16,
+    y: 49,
     rotate: -4,
     flyIn: false,
   },
@@ -326,9 +326,9 @@ export default function CrimeBoard({ triggered }: { triggered: boolean }) {
         })}
 
         {/* Sticky notes */}
-        <div className="sticky sticky-1"><p>Hello there<br />welcome!</p></div>
-        <div className="sticky sticky-2"><p>Who is<br />lenessant?</p></div>
-        <div className="sticky sticky-3"><p>more coming<br />soon !!</p></div>
+        <div className="sticky sticky-1"><p>Last Seen: Changing #FFF to #FFE and calling it <br />a "complete UI overhaul"</p></div>
+        <div className="sticky sticky-2"><p>Note: Suspect completed 30 commits at 2:00 AM</p></div>
+        <div className="sticky sticky-3"><p>more coming soon !!</p></div>
 
         <div className="board-label">EVIDENCE BOARD // CASE #304</div>
       </div>

@@ -41,7 +41,7 @@
 .board-inner {
   position: absolute;
   inset: 0;
-  top: 200px;
+  top: 250px;
   bottom: 30px;
   margin: 0 180px;
   background-image:
@@ -238,10 +238,9 @@
 
 .sticky {
   position: absolute;
-  width: 140px;
   padding: 12px 10px;
-  font-family: "Caveat", cursive;
-  font-size: 1.5rem;
+  font-family: "Handlee", cursive;
+  font-size: 1rem;
   font-weight: bold;
   line-height: 1.8;
   color: #6b3a52;
@@ -254,7 +253,7 @@
 .sticky-1 { background: #f5a6d3; top: 5%; right: 4%; transform: rotate(4deg); }
 .sticky-2 { background: #e88fc4; bottom: 8%; left: 3%; transform: rotate(-3deg); }
 .sticky-3 { background: #f0b3d9; top: 35%; right: 2%; transform: rotate(-5deg); }
-.sticky-4 { background: #e877b5; bottom: 15%; right: 8%; transform: rotate(3deg); }
+
 
 
 /* ── Modal ── */
