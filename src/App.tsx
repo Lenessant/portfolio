@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import LockerScene from "./components/Locker";
 import CaseFile from "./components/CaseFile";
 import CrimeBoard from "./components/CrimeBoard";
-import Contract from "./components/ContactPrintout"
+import Contract from "./components/ContactPrintout";
 import DesktopOnlyGate from "./components/DesktopOnlyGate";
 import { LayoutGroup } from "motion/react";
 
@@ -19,6 +19,15 @@ function App() {
     setTimeout(() => setStage("black"), 100);
     setTimeout(() => setStage("file"), 450);
   };
+
+  // Safely scroll down only after the CrimeBoard component actually updates and mounts
+  useEffect(() => {
+    if (boardTriggered) {
+      document
+        .querySelector(".crime-board")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [boardTriggered]);
 
   return (
     <DesktopOnlyGate>
@@ -51,11 +60,6 @@ function App() {
                 <CaseFile
                   onEvidenceClick={() => {
                     setBoardTriggered(true);
-                    setTimeout(() => {
-                      document
-                        .querySelector(".crime-board")
-                        ?.scrollIntoView({ behavior: "smooth" });
-                    }, 100);
                   }}
                 />
               </div>
